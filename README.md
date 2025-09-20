@@ -435,7 +435,7 @@ case 7  % New track ID
 
 Update the Pista parameter validation:
 
-matlab
+```matlab
 function setupSimulinkSolucao(solucao, Pista)
     % Validate track selection
     if Pista < 0 || Pista > 7  % Updated from 6 to 7
@@ -445,11 +445,13 @@ function setupSimulinkSolucao(solucao, Pista)
     % Existing code...
     assignin('base', 'Pista', Pista);
 end
+```
+
 3. Updating fcusto_completa.m:
 
 Extend the loop to include the new track:
 
-matlab
+```matlab
 function custo = fcusto_completa(x) 
     % Existing code...
     for i = 1:7  % Changed from 6 to 7
@@ -457,10 +459,12 @@ function custo = fcusto_completa(x)
         % Simulation and cost calculation...
     end
 end
+```
+
 4. Creating Track Configuration File (Optional):
 Create a separate function to manage track parameters:
 
-matlab
+```matlab
 function track_params = getTrackParameters(Pista)
     switch Pista
         case 1
@@ -477,10 +481,12 @@ function track_params = getTrackParameters(Pista)
             error('Invalid track selection');
     end
 end
+```
+
 5. Validation and Testing:
 After adding the new track, validate its performance:
 
-matlab
+```matlab
 % Test the new track specifically
 test_solution = [Kp, Ki, Kd];
 Pista = 7; % New track ID
@@ -497,37 +503,26 @@ legend('Reference Path', 'Actual Path');
 xlabel('X Position (m)');
 ylabel('Y Position (m)');
 grid on;
+```
+
 Track Design Considerations:
 
-Ensure smooth curvature transitions to avoid controller instability
+ - Ensure smooth curvature transitions to avoid controller instability, for example, ramp or parabollic change in angular reference.
 
-Maintain reasonable maximum curvature values
+ - Maintain reasonable maximum curvature values
 
-Consider adding varying difficulty levels (straight sections, sharp turns, S-curves)
-
-Include speed profile recommendations for different track segments
+ - Consider adding varying difficulty levels (straight sections, sharp turns, S-curves)
 
 
+## File Dependencies
+The implementation use the following dependency structure:
 
-File Dependencies
-The implementation requires the following supporting files:
+## Prerequisites
 
-Simulink models (ModeloCompleto.slx, Modelo.slx)
+ - MATLAB R2018b or later
 
-Helper functions (InterageSimulink_*.m, CalculaCusto.m, PonderaCusto.m)
+ - Simulink
 
-Perturbation function (PerturbaSolucao.m)
+ - Global Optimization Toolbox
 
-Temperature calculation functions (Calcula_Delta_E.m, CalculaT0.m)
-
-This framework provides a comprehensive approach to controller optimization for a complex mechatronic system, balancing computational efficiency with modeling fidelity.
-
-
-Prerequisites
-MATLAB R2018b or later
-
-Simulink
-
-Global Optimization Toolbox
-
-Control System Toolbox
+ - Control System Toolbox
