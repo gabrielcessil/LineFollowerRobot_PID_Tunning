@@ -149,52 +149,52 @@ TestaResultado([Kp, Ki, Kd]);
 ValidaResultado([Kp, Ki, Kd]);
 ```
 
-Configuration
-The system behavior can be modified by adjusting constants in setupSimulinkConstantes():
+# Configuration
+## The system behavior can be modified by adjusting constants in `setupSimulinkConstantes()`:
 
-Simulation time (simuTime): Default 27 seconds
+ - Simulation time (simuTime): Default 27 seconds
 
-Cost function formula (custoFormula): Default 'itse'
+ - Cost function formula (custoFormula): Default 'itse'
 
-Error weights (peso_Rotacao, peso_Translacao)
+ - Error weights (peso_Rotacao, peso_Translacao)
 
-Performance thresholds (erroMax_rotacao, erroMax_translacao)
+ - Performance thresholds (erroMax_rotacao, erroMax_translacao)
 
-Optimization Parameters
-Genetic Algorithm
-Population size: 30
+## The Optimization can be modified by the following parameters:
+### Genetic Algorithm
+ - Population size: 30
 
-Maximum generations: 20
+ - Maximum generations: 20
 
-Maximum time: 6 hours
+ - Maximum time: 6 hours
 
-Bounds: [0, 0, 0] to [10000, 10000, 10000]
+ - Bounds: [0, 0, 0] to [10000, 10000, 10000]
 
-Selection: Roulette wheel
+ - Selection: Roulette wheel
 
-Crossover: Heuristic
+ - Crossover: Heuristic
 
-Mutation: Adaptive feasible
+ - Mutation: Adaptive feasible
 
-Simulated Annealing
-Temperature decay: Exponential
+### Simulated Annealing
+ - Temperature decay: Exponential
 
-Initial temperature: Automatically calculated
+ - Initial temperature: Automatically calculated
 
-Reannealing: Every 1/5 of maximum iterations
+ - Reannealing: Every 1/5 of maximum iterations
 
-Bounds: [-Inf, -Inf, -Inf] to [Inf, Inf, Inf]
+ - Bounds: [-Inf, -Inf, -Inf] to [Inf, Inf, Inf]
 
-Implementation Notes
-The simulation uses normalized errors relative to expected maximum values
+# Implementation Notes
+ - The simulation uses normalized errors relative to expected maximum values
 
-Infeasible solutions (early termination) receive infinite cost
+ - Infeasible solutions (early termination) receive infinite cost
 
-The complete cost function evaluates performance across all six tracks
+ - The complete cost function evaluates performance across all six tracks
 
-Results validation includes both numerical metrics and graphical plots
+ - Results validation includes both numerical metrics and graphical plots
 
-The optimization process includes visualization of convergence metrics
+ - The optimization process includes visualization of convergence metrics
 
 # Detailed Function Documentation
 
