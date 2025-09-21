@@ -35,7 +35,9 @@ Where:
 
 ## Plant Model
 
-The system models a differential drive robot with the following characteristics:
+The system is a differential drived robot, where the differential tension on the motor make the car rotate while the offset applied to both motor make the car go straight. The car physics is built in Simulink as modelled by: Dhaouadi, Rached, and A. Abu Hatab. *"Dynamic modelling of differential-drive mobile robots using lagrange and newton-euler methodologies: A unified framework."* Advances in robotics & automation 2.2 (2013): 1-7.
+
+The following parameters must be set:
 
 ### Mechanical Properties
 - Wheel radius (R): 0.05 m
@@ -56,6 +58,8 @@ The system models a differential drive robot with the following characteristics:
 ### Sensor System
 - Angular quantization interval: π/16 rad
 - Sampling time: 0.01 s
+
+Observation: Many Line-Followers cars dont have a angular levels equally distributed, for example, when the sensors are placed in a rectangular/straigth board or when the sensors are closer in the central part of the car.  
 
 ## Simulation Environment
 
