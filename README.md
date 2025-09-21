@@ -2,7 +2,7 @@
 
 ## Overview
 
-This project implements a comprehensive optimization framework for tuning a PID controller applied to a line-following robot. The system uses both Genetic Algorithm (GA) and Simulated Annealing (SA) optimization techniques to find optimal controller parameters that minimize tracking errors across multiple test tracks.
+This project implements a comprehensive optimization framework for tuning a PID controller applied to a line-following robot. The system employs both Genetic Algorithm (GA) and Simulated Annealing (SA) optimization techniques to find optimal controller parameters that minimize tracking errors across multiple test tracks.
 
 ## Theoretical Methodology
 
@@ -17,7 +17,7 @@ Where:
 - `Kp`, `Ki`, `Kd` are the proportional, integral, and derivative gains respectively
 - `e(t)` is the tracking error at time t
 
-The set controller command the wheel motors, affecting two error aspects:
+The set controller commands the wheel motors, affecting two error aspects:
 1. **Rotational error**: Angular deviation from the reference path
 2. **Translational error**: Positional deviation from the reference path
 
@@ -35,7 +35,7 @@ Where:
 
 ## Plant Model
 
-The system is a differential drived robot, where the differential tension on the motor make the car rotate while the offset applied to both motor make the car go straight. The car physics is built in Simulink as modelled by: Dhaouadi, Rached, and A. Abu Hatab. *"Dynamic modelling of differential-drive mobile robots using lagrange and newton-euler methodologies: A unified framework."* Advances in robotics & automation 2.2 (2013): 1-7.
+The system is a differential-driven robot, where the differential tension on the motor make the car rotate while the offset applied to both motor make the car go straight. The car's physics is built in Simulink as modelled by: Dhaouadi, Rached, and A. Abu Hatab. *"Dynamic modelling of differential-drive mobile robots using lagrange and newton-euler methodologies: A unified framework."* Advances in robotics & automation 2.2 (2013): 1-7.
 
 The following parameters must be set:
 
@@ -59,7 +59,7 @@ The following parameters must be set:
 - Angular quantization interval: π/16 rad
 - Sampling time: 0.01 s
 
-Observation: Many Line-Followers cars dont have a angular levels equally distributed, for example, when the sensors are placed in a rectangular/straigth board or when the sensors are closer in the central part of the car.  
+Observation: Many Line-Following cars do not have angular levels equally distributed, for example, when the sensors are placed in a rectangular/straight board or when the sensors are closer in the central part of the car.  
 
 ## Simulation Environment
 
@@ -156,7 +156,7 @@ ValidaResultado([Kp, Ki, Kd]);
 # Configuration
 ## The system behavior can be modified by adjusting constants in `setupSimulinkConstantes()`:
 
- - Simulation time (simuTime): Default 27 seconds, must be enough for a complete lap.  
+ - Simulation time (simuTime): Default 27 seconds, must be long enough for a complete lap.  
 
  - Cost function formula (custoFormula): Default 'itse'
 
@@ -166,9 +166,9 @@ ValidaResultado([Kp, Ki, Kd]);
 
 ## The Optimization can be modified by the following parameters:
 ### Genetic Algorithm
- - Population size: How many solutions are evaluated and compared in each step/generations (Ex: 30) 
+ - Population size: How many solutions are evaluated and compared in each step/generation (Ex: 30) 
 
- - Maximum generations: How many times it generates new solutions, compared and took the best one (Ex: 20)
+ - Maximum generations: How many times it generates new solutions, compares them, and takes the best ones (Ex: 20)
 
  - Maximum time: Timeout to avoid exhaustive search (Ex: 6 hours) 
 
@@ -187,10 +187,10 @@ ValidaResultado([Kp, Ki, Kd]);
 
  - Reannealing: Every 1/5 of maximum iterations
 
- - Bounds: Minimmum and Maximmum controller grains (Ex: [0, 0, 0] to [10000, 10000, 10000])
+ - Bounds: Minimum and Maximum controller grains (Ex: [0, 0, 0] to [10000, 10000, 10000])
 
 # Implementation Notes
- - The simulation uses normalized errors relative to expected maximum values
+ - The simulation employs normalized errors relative to expected maximum values
 
  - Infeasible solutions (early termination) receive infinite cost
 
@@ -511,15 +511,26 @@ grid on;
 
 Track Design Considerations:
 
- - Ensure smooth curvature transitions to avoid controller instability, for example, ramp or parabollic change in angular reference.
+ - Ensure smooth curvature transitions to avoid controller instability, for example, ramp or parabolic change in angular reference.
 
  - Maintain reasonable maximum curvature values
 
  - Consider adding varying difficulty levels (straight sections, sharp turns, S-curves)
 
+Discussions and Limitation:
+
+The simulation of the car and controller could be done in proper software as ROS or others. However, this simplistic Matlab enables to customizations easily in the controller and optimization process. Here, we approximate the error signal, since the main objective of this work is to tune the car controller, and such tuned controlled can be resimulated in other environments for validation. So this approach is beneficial to the development with proper validation.
+
+
+The approximation is that the angular reference signal changes independent to the car action. The angular reference changes with a preset timing, not accounting on the car. For example, the car can move perpendicular to the line, but the signal of a curve will happen even though the car is far away not following the line anymore. We can visualize this approximation as not following a statical line in the ground, but as blindly mimicking the angular signal coming from a reference car that follows the line perfectly. 
+
+With this, we expect that the better the designed controller is able to follow the dynamic of the this refence car, the better the controller will be when finally following the physical line or in the validation simulation in ROS or others.
+
+
+
 
 ## File Dependencies
-The implementation use the following dependency structure:
+The implementation uses the following dependency structure:
 
 ## Prerequisites
 
