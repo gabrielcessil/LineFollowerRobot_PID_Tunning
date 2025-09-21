@@ -156,7 +156,7 @@ ValidaResultado([Kp, Ki, Kd]);
 # Configuration
 ## The system behavior can be modified by adjusting constants in `setupSimulinkConstantes()`:
 
- - Simulation time (simuTime): Default 27 seconds
+ - Simulation time (simuTime): Default 27 seconds, must be enough for a complete lap.  
 
  - Cost function formula (custoFormula): Default 'itse'
 
@@ -166,28 +166,28 @@ ValidaResultado([Kp, Ki, Kd]);
 
 ## The Optimization can be modified by the following parameters:
 ### Genetic Algorithm
- - Population size: 30
+ - Population size: How many solutions are evaluated and compared in each step/generations (Ex: 30) 
 
- - Maximum generations: 20
+ - Maximum generations: How many times it generates new solutions, compared and took the best one (Ex: 20)
 
- - Maximum time: 6 hours
+ - Maximum time: Timeout to avoid exhaustive search (Ex: 6 hours) 
 
- - Bounds: [0, 0, 0] to [10000, 10000, 10000]
+ - Bounds: Minimmum and Maximmum controller grains (Ex: [0, 0, 0] to [10000, 10000, 10000])
 
- - Selection: Roulette wheel
+ - Selection: Method to select the best solutions in a population, i.e, the ones that remain to the next generation (Ex: Roulette wheel)
 
- - Crossover: Heuristic
+ - Crossover: Method to exchange informations that compose two solutions, creating a combination of them. (Ex: Heuristic)
 
- - Mutation: Adaptive feasible
+ - Mutation: Mehtod to randomly change the solution's parameters, creating new ones (Adaptive feasible)
 
 ### Simulated Annealing
- - Temperature decay: Exponential
+ - Temperature decay: The way that the temperature that drives the acception probability decays (Ex: Exponential)
 
  - Initial temperature: Automatically calculated
 
  - Reannealing: Every 1/5 of maximum iterations
 
- - Bounds: [-Inf, -Inf, -Inf] to [Inf, Inf, Inf]
+ - Bounds: Minimmum and Maximmum controller grains (Ex: [0, 0, 0] to [10000, 10000, 10000])
 
 # Implementation Notes
  - The simulation uses normalized errors relative to expected maximum values
