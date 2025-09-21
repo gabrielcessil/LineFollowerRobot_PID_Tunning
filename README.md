@@ -517,7 +517,7 @@ Track Design Considerations:
 
  - Consider adding varying difficulty levels (straight sections, sharp turns, S-curves)
 
-Discussions and Limitation:
+## Discussions and Limitation:
 
 The simulation of the car and controller could be done in proper software as ROS or others. However, this simplistic Matlab enables to customizations easily in the controller and optimization process. Here, we approximate the error signal, since the main objective of this work is to tune the car controller, and such tuned controlled can be resimulated in other environments for validation. So this approach is beneficial to the development with proper validation.
 
