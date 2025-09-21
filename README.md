@@ -17,7 +17,7 @@ Where:
 - `Kp`, `Ki`, `Kd` are the proportional, integral, and derivative gains respectively
 - `e(t)` is the tracking error at time t
 
-The controller operates on two error signals:
+The set controller command the wheel motors, affecting two error aspects:
 1. **Rotational error**: Angular deviation from the reference path
 2. **Translational error**: Positional deviation from the reference path
 
