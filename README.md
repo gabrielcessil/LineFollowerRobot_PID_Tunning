@@ -110,6 +110,45 @@ The simulation environment consists of:
   - 0: Validation track (used in `ValidaResultado`)
   - 1-6: Training tracks (used in optimization)
 
+#### Environment Inputs
+The simulation environment uses a set of predefined constants stored in `setupSimulinkConstantes.m`. These variables are automatically exported to the MATLAB base workspace and configure all aspects of the robot model:
+
+##### Mechanical Constants
+- R — Wheel radius [m]
+- L — Half of the wheelbase distance [m]
+- d — Distance between wheel axle and center of mass [m]
+- J — Moment of inertia around the center of mass [kg·m²]
+- M — Total robot mass [kg]
+- N — Gear ratio (motor speed / wheel speed)
+
+##### Electrical Constants
+- Ra — Armature resistance [Ω]
+- La — Motor inductance [H]
+- Kb — Back-EMF constant
+- Kt — Torque constant
+- Kc — Converter gain
+
+##### Control Constants
+- Va_med — Average voltage delivered by the controller [V]
+- intervalo_quantizacao_sensor — Angular step between sensor readings [rad]
+- tempo_de_amostragem — Sampling time [s]
+
+##### Simulation Setup
+- simuTime — Total simulation time [s]
+
+##### Cost Metric Configuration
+- custoFormula — Cost formula used during optimization (e.g., IAE)
+- peso_Translacao — Weight applied to translation error
+- peso_Rotacao — Weight applied to rotational error
+
+##### Expected Performance Limits
+- erroMax_translacao — Maximum acceptable Cartesian deviation from the line [m]
+- erroMax_rotacao — Maximum acceptable angular misalignment [rad]
+
+##### Infeasibility Thresholds
+- erroInviavel_translacao — Translation error considered infeasible [m]
+- erroInviavel_rotacao — Rotation error considered infeasible [rad]
+
 #### Simulation Outputs
 - `teta_ref`, `teta_out`: Reference and actual rotation angles
 - `pos_ref`, `pos_out`: Reference and actual positions (2D)
@@ -121,6 +160,9 @@ The simulation environment consists of:
 - `fval`: Final objective function value
 - `exitFlag`: Optimization termination reason
 - `output`: Optimization process information
+
+
+
 
 ## Usage Guide
 
