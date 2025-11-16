@@ -47,9 +47,11 @@ The simulation environment consists of:
 3. **Performance metrics**:
    - Maximum expected rotation error: π/2 rad
    - Maximum expected translation error: 0.2 m
-   - Infeasibility thresholds (for early termination):
+   - Infeasibility thresholds (for early termination of simulation):
      - Rotation: π rad
      - Translation: 10 m
+
+   If this threshold are met at any instant the loss function will be considered as inf. since the would lost track.  This approach would potentially damange the optimization in continuous approaches. However, due the capacity of genetic algorithm and simulated annealing to generate and compare multiple solutions with discrete steps in solution, space we believe that such restriction enforces the search to be restricted away from problematic regions. 
 
 ## Code Structure
 
