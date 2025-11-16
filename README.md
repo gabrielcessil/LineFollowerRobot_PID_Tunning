@@ -33,34 +33,6 @@ Where:
 - w_rot, w_trans are weighting factors (0.4 and 0.3 respectively)
 - f(·) is a cost function (ITSE - Integral of Time multiplied by Squared Error)
 
-## Plant Model
-
-The system is a differential-driven robot, where the differential tension on the motor make the car rotate while the offset applied to both motor make the car go straight. The car's physics is built in Simulink as modelled by: Dhaouadi, Rached, and A. Abu Hatab. *"Dynamic modelling of differential-drive mobile robots using lagrange and newton-euler methodologies: A unified framework."* Advances in robotics & automation 2.2 (2013): 1-7.
-
-The following parameters must be set:
-
-### Mechanical Properties
-- Wheel radius (R): 0.05 m
-- Distance between wheels/2 (L): 0.1 m
-- Distance from wheel axis to center of mass (d): 0.01 m
-- Moment of inertia (J): 0.0015 kg·m²
-- Total mass (M): 0.25 kg
-- Gear reduction ratio (N): 30:1
-
-### Electrical Properties
-- Armature resistance (Ra): 5 mΩ
-- Armature inductance (La): 1 μH
-- Back EMF constant (Kb): 0.4 V·s/rad
-- Torque constant (Kt): 0.4 N·m/A
-- Converter gain (Kc): 4 V/V
-- Average controller voltage (Va_med): 2.5 V
-
-### Sensor System
-- Angular quantization interval: π/16 rad
-- Sampling time: 0.01 s
-
-Observation: Many Line-Following cars do not have angular levels equally distributed, for example, when the sensors are placed in a rectangular/straight board or when the sensors are closer in the central part of the car.  
-
 ## Simulation Environment
 
 The simulation environment consists of:
@@ -104,50 +76,40 @@ The simulation environment consists of:
 
 ### Inputs and Outputs
 
+
+#### Plant Model Inputs
+
+The system is a differential-driven robot, where the differential tension on the motor make the car rotate while the offset applied to both motor make the car go straight. The car's physics is built in Simulink as modelled by: Dhaouadi, Rached, and A. Abu Hatab. *"Dynamic modelling of differential-drive mobile robots using lagrange and newton-euler methodologies: A unified framework."* Advances in robotics & automation 2.2 (2013): 1-7.
+
+The following parameters must be set in  `setupSimulinkConstantes.m`:
+
+##### Mechanical Properties
+- Wheel radius (R): 0.05 m
+- Distance between wheels/2 (L): 0.1 m
+- Distance from wheel axis to center of mass (d): 0.01 m
+- Moment of inertia (J): 0.0015 kg·m²
+- Total mass (M): 0.25 kg
+- Gear reduction ratio (N): 30:1
+
+##### Electrical Properties
+- Armature resistance (Ra): 5 mΩ
+- Armature inductance (La): 1 μH
+- Back EMF constant (Kb): 0.4 V·s/rad
+- Torque constant (Kt): 0.4 N·m/A
+- Converter gain (Kc): 4 V/V
+- Average controller voltage (Va_med): 2.5 V
+
+##### Sensor System
+- Angular quantization interval: π/16 rad
+- Sampling time: 0.01 s
+
+Observation: Many Line-Following cars do not have angular levels equally distributed, for example, when the sensors are placed in a rectangular/straight board or when the sensors are closer in the central part of the car.  
+
 #### Optimization Inputs
 - `solucao`: Vector [Kp, Ki, Kd] containing controller parameters
 - `Pista`: Integer (0-6) specifying which track to simulate
   - 0: Validation track (used in `ValidaResultado`)
   - 1-6: Training tracks (used in optimization)
-
-#### Environment Inputs
-The simulation environment uses a set of predefined constants stored in `setupSimulinkConstantes.m`. These variables are automatically exported to the MATLAB base workspace and configure all aspects of the robot model:
-
-##### Mechanical Constants
-- R — Wheel radius [m]
-- L — Half of the wheelbase distance [m]
-- d — Distance between wheel axle and center of mass [m]
-- J — Moment of inertia around the center of mass [kg·m²]
-- M — Total robot mass [kg]
-- N — Gear ratio (motor speed / wheel speed)
-
-##### Electrical Constants
-- Ra — Armature resistance [Ω]
-- La — Motor inductance [H]
-- Kb — Back-EMF constant
-- Kt — Torque constant
-- Kc — Converter gain
-
-##### Control Constants
-- Va_med — Average voltage delivered by the controller [V]
-- intervalo_quantizacao_sensor — Angular step between sensor readings [rad]
-- tempo_de_amostragem — Sampling time [s]
-
-##### Simulation Setup
-- simuTime — Total simulation time [s]
-
-##### Cost Metric Configuration
-- custoFormula — Cost formula used during optimization (e.g., IAE)
-- peso_Translacao — Weight applied to translation error
-- peso_Rotacao — Weight applied to rotational error
-
-##### Expected Performance Limits
-- erroMax_translacao — Maximum acceptable Cartesian deviation from the line [m]
-- erroMax_rotacao — Maximum acceptable angular misalignment [rad]
-
-##### Infeasibility Thresholds
-- erroInviavel_translacao — Translation error considered infeasible [m]
-- erroInviavel_rotacao — Rotation error considered infeasible [rad]
 
 #### Simulation Outputs
 - `teta_ref`, `teta_out`: Reference and actual rotation angles
